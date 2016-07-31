@@ -34,12 +34,25 @@
 
 <script>
     $(document).ready(function () {
- var docDefinition = { content: 'This is an sample PDF printed with pdfMake' };
 
-
-
+        var docDefinition = {
+            content: 'যদি কখনও ভিনসেন্ট ভ্যান গগ আমাকে আকতো! ',
+            defaultStyle: {
+                font: 'Siyamrupali'
+            }
+        };
         $('.buttin_click_1').click(function () {
             console.log('btn 1 clicked');
+            pdfMake.fonts = {
+                kalpurush: {
+                    normal: 'kalpurush ANSI.ttf'
+                },
+                Siyamrupali: {
+                    normal: 'Siyamrupali.ttf'
+                }
+            };
+
+
             pdfMake.createPdf(docDefinition).open();
         });
 
