@@ -6,7 +6,7 @@
     <title>html to pdf</title>
     <link href="css/main.css" rel="stylesheet">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src='pdfmake/build/pdfmake.min.js'></script>
+    <script src='pdfmake/build/pdfmake.js'></script>
     <script src='pdfmake/build/vfs_fonts.js'></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -35,25 +35,69 @@
 <script>
     $(document).ready(function () {
 
-        var docDefinition = {
-            content: 'যদি কখনও ভিনসেন্ট ভ্যান গগ আমাকে আকতো! ',
-            defaultStyle: {
-                font: 'Siyamrupali'
-            }
-        };
+
         $('.buttin_click_1').click(function () {
-            console.log('btn 1 clicked');
+
             pdfMake.fonts = {
-                kalpurush: {
-                    normal: 'kalpurush ANSI.ttf'
+                Roboto:{
+                    normal: 'Roboto-Regular.ttf',
+                    bold: 'Roboto-Medium.ttf',
+                    italics: 'Roboto-Italic.ttf',
+                    bolditalics: 'Roboto-Italic.ttf'
                 },
-                Siyamrupali: {
-                    normal: 'Siyamrupali.ttf'
+                SolaimanLipi: {
+                    normal: 'SolaimanLipi.ttf',
+                    bold: 'SolaimanLipi.ttf',
+                    italics: 'SolaimanLipi.ttf',
+                    bolditalics: 'SolaimanLipi.ttf'
+                }
+            };
+            var docDefinition = {
+                content: 'hjgljgljk uiuuuuuuuuuuiuiu njhghg',
+                style: {
+                    font: 'SolaimanLipi'
                 }
             };
 
+            console.log(docDefinition);
 
             pdfMake.createPdf(docDefinition).open();
+
+
+            $.get("/nirjhar", function(data, status) {
+                console.log(data);
+                window.open('data:application/pdf;base64,' + data);
+
+
+//                alert("Data: " + data + "\nStatus: " + status);
+//                console.log(data);
+//
+//                pdfMake.fonts = {
+//                    Roboto:{
+//                        normal: 'examples/fonts/Roboto-Regular.ttf',
+//                        bold: 'examples/fonts/Roboto-Medium.ttf',
+//                        italics: 'examples/fonts/Roboto-Italic.ttf',
+//                        bolditalics: 'examples/fonts/Roboto-Italic.ttf'
+//                    },
+//                    SolaimanLipi: {
+//                        normal: 'examples/fonts/SolaimanLipi.ttf',
+//                        bold: 'examples/fonts/SolaimanLipi.ttf',
+//                        italics: 'examples/fonts/SolaimanLipi.ttf',
+//                        bolditalics: 'examples/fonts/SolaimanLipi.ttf'
+//                    }
+//                };
+//                var docDefinition = {
+//                    content: data[0].name + 'h\u016B'  + 'নির্ঝর',
+//                    style: {
+//                        font: 'SolaimanLipi'
+//                    }
+//                };
+//
+//                console.log(docDefinition);
+//
+//                pdfMake.createPdf(docDefinition).open();
+
+            });
         });
 
         $('.button_click_2').click(function () {
