@@ -5,7 +5,9 @@ var port = process.env.PORT || 8080;
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
 var Cat = mongoose.model('Cat', { name: String });
+var bodyParser = require('body-parser');
 
+app.use(bodyParser());
 
 app.set('views', './app/views');
 app.set('view engine', 'ejs'); // set up ejs for templating
@@ -16,19 +18,20 @@ app.use(express.static('./public'));
  app.get('/', function (req, res) {
 
 
-     // var Cat = mongoose.model('Cat', { name: String });
+    //  var Cat = mongoose.model('Cat', { name: String });
      //
-     // var kitty = new Cat({ name: 'Zildjian' });
-     // kitty.save(function (err) {
-     //     if (err) {
-     //         console.log(err);
-     //     } else {
-     //         console.log('meow');
-     //     }
-     // });
+    //  var kitty = new Cat({ name: 'Zildjian' });
+    //  kitty.save(function (err) {
+    //      if (err) {
+    //          console.log(err);
+    //      } else {
+    //          console.log('meow');
+    //      }
+    //  });
 
      res.render('main');
     });
+
 
 function delayedMessge(docDefinition,callback,res) {
     var fonts = {
@@ -50,9 +53,9 @@ function delayedMessge(docDefinition,callback,res) {
         Shonar: {
             normal: './fonts/Shonar.ttf'
         },
-        'kalpurush ANSI': {
-            normal: './fonts/kalpurush ANSI.ttf'
-        }
+        AdorshoLipi: {
+            normal: './fonts/AdorshoLipi.ttf'
+        },
     };
     var PdfPrinter = require('pdfmake/src/printer');//
     var printer = new PdfPrinter(fonts);//kalpurush
@@ -77,14 +80,15 @@ function delayedMessge(docDefinition,callback,res) {
 
     doc.end();
 }
-app.get('/nirjhar',function (err,res) {
+app.post('/nirjhar',function (req,res) {
+
     Cat.find(function (err, kittens) {
         if (err) return console.error(err);
 
         var docDef = {
-            content: kittens[0].name,
+            content: req.body.mytext,
             defaultStyle : {
-                font : 'Siyamrupali'
+                font : 'AdorshoLipi'
             }
         };
         delayedMessge(docDef,null,res);
